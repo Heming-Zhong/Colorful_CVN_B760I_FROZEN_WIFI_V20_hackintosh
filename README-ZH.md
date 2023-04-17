@@ -84,4 +84,6 @@ TODO：上传图片
 
 猜测：从联网变严重这一点来看，我猜测这个问题可能和网络驱动密切相关。但是由于RTL8125和AirportItlwm分别启用时都会导致类似的问题
 
+补充信息：在kernel的日志信息中可以看到许多的 `kernel connect() - failed necp_set_socket domain attributes` 错误，但是关于该日志信息未能找到任何的相关资料。
+
 
