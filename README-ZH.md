@@ -60,7 +60,9 @@ TODO：上传截图
 
 因此，面对这个问题最好的解决方法，就是在开始安装前先用USBToolBox完成主板+机箱的USB定制，然后用定制好的EFI去进行安装。
 
-具体定制方法请参考：
+具体定制方法请参考：[USB定制](https://apple.sqlsec.com/6-%E5%AE%9E%E7%94%A8%E5%A7%BF%E5%8A%BF/6-1/), [USBToolBox](https://github.com/USBToolBox/tool/)
+
+另外，如果和我用的主板、机箱一样的话，直接用我EFI中的`USBPorts.kext`就可以了。
 
 ## 跑分
 
