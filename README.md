@@ -11,7 +11,7 @@ hackintosh EFI for CVN B760I FROZEN WIFI V20 motherboard
 
 - BIOS Version: 1004 (2023/01/05)
 
-- Memory: JINGBAIDA Silver Knight DDR4 3200Mhz ChangXin Adie 16GB (8x2)
+- Memory: KingBank Silver Knight DDR4 3200Mhz ChangXin Adie 16GB (8x2)
 
 - SSD: Samsung 980pro 1TB
 
