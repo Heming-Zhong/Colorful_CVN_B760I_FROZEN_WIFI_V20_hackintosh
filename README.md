@@ -13,7 +13,7 @@ hackintosh EFI for CVN B760I FROZEN WIFI V20 motherboard
 
 - Memory: KingBank Silver Knight DDR4 3200Mhz ChangXin Adie 16GB (8x2)
 
-- SSD: Samsung 980pro 1TB
+- SSD: Western Digital SN850X 2TB
 
 - Graphics Card: PowerColor Gaming Edition 6600xt 8GB (Mining Card)
 
@@ -28,7 +28,7 @@ hackintosh EFI for CVN B760I FROZEN WIFI V20 motherboard
 ## EFI Info
 
 - OpenCore Version: 0.9.0
-- macOS Version: macOS Ventura 13.2.1
+- macOS Version: macOS Monterey 12.6.6
 
 ## BIOS Settings
 
@@ -89,6 +89,8 @@ TBD
 
 - [ ] Incomplete support for Intel wireless cards, a lot native functions like Airdrop cannot be used.
 
+- [ ] Abnormal sleeping: wake immediately right after going to sleep. Probably a USB power/wakeup issue.
+
 - [x] ACPI not customized: customized through SSDTTime.
 
 - [x] Imperfect CPU scheduling, force Turbo Boost through AppleXcpmForceBoost: thanks to the [previous work](https://github.com/LimeVista/Hackintosh-H610-12490F-AX201), currently the scheduling is quite good.
@@ -101,18 +103,24 @@ TBD
 
 Symptoms: Randomly freezes, possibly accompanied by a rainbow cursor. Frequently occurs during input method switching, application window opening/closing, and network video playback. The frequency of occurrence is much higher when connected to the internet than when not. Besides, the longer the computer is on, the more frequently this issue occurs.
 
-Hypothesis: Based on the severity increase when connected to the internet, this issue may be closely related to network drivers. However, as both LucyRTL8125 and AirportItlwm cause similar issues when enabled, it is difficult to determine the exact cause.
+~~Hypothesis: Based on the severity increase when connected to the internet, this issue may be closely related to network drivers. However, as both LucyRTL8125 and AirportItlwm cause similar issues when enabled, it is difficult to determine the exact cause.~~
 
-Additional information: In the kernel log information, there are many `kernel connect() - failed necp_set_socket domain attributes` errors, but no related information was found on this error log.
+~~Additional information: In the kernel log information, there are many `kernel connect() - failed necp_set_socket domain attributes` errors, but no related information was found on this error log.~~
 
-Update: This issue was mostly resolved by reinstalling on a partition of the main hard drive, which is located in the front of the motherboard. Although it still occasionally lags, it is mostly usable now. I suspect that the cause of this issue may be multifaceted and may be related to the following factors:
+~~Update: This issue was mostly resolved by reinstalling on a partition of the main hard drive, which is located in the front of the motherboard. Although it still occasionally lags, it is mostly usable now. I suspect that the cause of this issue may be multifaceted and may be related to the following factors:~~
 
-1. Southbridge bandwidth and latency: the most likely cause. The DMI bus connecting the b760 chipset and the CPU will be used by network IO, disk IO, and possibly even GPU communication, and the DMI (PCIe) bus channel is usually exclusive. Therefore, frequent background IO operations may cause a bottleneck in the DMI bus, resulting in user operation delays and frequent lagging during use. (Of course, these are just my speculations, my technical ability is not enough to verify this hypothesis. Experienced experts may try to verify it.)
+~~1. Southbridge bandwidth and latency: the most likely cause. The DMI bus connecting the b760 chipset and the CPU will be used by network IO, disk IO, and possibly even GPU communication, and the DMI (PCIe) bus channel is usually exclusive. Therefore, frequent background IO operations may cause a bottleneck in the DMI bus, resulting in user operation delays and frequent lagging during use. (Of course, these are just my speculations, my technical ability is not enough to verify this hypothesis. Experienced experts may try to verify it.)~~
 
-2. Unstable memory access: this has already been verified through several little experiments. In simple memory read/write and copy tests, the delay overhead of the same operation fluctuates greatly. For example, the time overhead of copying a 512MB memory block may fluctuate by up to 0.5 seconds. Clearly, this phenomenon is the direct cause of frequent lagging. However, the underlying cause of this issue is hard to determine.
+~~2. Unstable memory access: this has already been verified through several little experiments. In simple memory read/write and copy tests, the delay overhead of the same operation fluctuates greatly. For example, the time overhead of copying a 512MB memory block may fluctuate by up to 0.5 seconds. Clearly, this phenomenon is the direct cause of frequent lagging. However, the underlying cause of this issue is hard to determine.~~
 
-3. Overheating of the SSD causing speed drops: one of the additional hypothesis. I did not install a case fan. Combined with the heat generated by the 980 Pro and the exposed drive on the backplate of motherboard, the temperature of the 980 Pro might rise quickly during use, causing the system to become more laggy.
+~~3. Overheating of the SSD causing speed drops: one of the additional hypothesis. I did not install a case fan. Combined with the heat generated by the 980 Pro and the exposed drive on the backplate of motherboard, the temperature of the 980 Pro might rise quickly during use, causing the system to become more laggy.~~
 
-4. Other factors: there are too many possibilities causing a hackintosh to lag: hard drive, memory, motherboard compatibility, EFI's incorrect configuration, flaws of forced TRIM enablement, imperfect CPU scheduling, imperfect network card driver/hardware adaptation, and other reasons. There are too many challenges to achieve a perfect Hackintosh, especially when hardwares are not perfectly compatible.
+~~4. Other factors: there are too many possibilities causing a hackintosh to lag: hard drive, memory, motherboard compatibility, EFI's incorrect configuration, flaws of forced TRIM enablement, imperfect CPU scheduling, imperfect network card driver/hardware adaptation, and other reasons. There are too many challenges to achieve a perfect Hackintosh, especially when hardwares are not perfectly compatible.~~
 
-In any case, this issue is now partially resolved. It can also be a lesson for everyone: **do not install on a secondary drive if you're using this motherboard**. For those interested in this issue, you can also try to dig deeper.
+~~In any case, this issue is now partially resolved. It can also be a lesson for everyone: **do not install on a secondary drive if you're using this motherboard**. For those interested in this issue, you can also try to dig deeper.~~
+
+**Latest Update**
+
+The problem is completely solved after I replaced my Samsung 980 Pro SSD with a Western Digital SN850X SSD. 
+
+So the answer is quite obvious: **Samsung SSDs are not very good choices for installing a hackintosh**. If you are going to install a hackintosh, **DONT use a 980 Pro**.
